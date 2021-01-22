@@ -1,4 +1,8 @@
 import React from 'react';
+import Character0 from './components/Character0';
+import Character1 from './components/Character1';
+import Character2 from './components/Character2';
+import Character3 from './components/Character3';
 import './App.css';
 
 const App = () => {
@@ -10,10 +14,16 @@ const App = () => {
   // sync up with, if any.
 
   return (
-    <div className="App">
-      <h1 className="Header">Characters</h1>
-    </div>
+      <section>
+        <div className="App">
+          <h1 className="Header">On The Look Out!</h1>
+        </div>
+        <div className='main-content'>
+          <Character0 /> <Character1 /> <Character2 /> <Character3 />
+        </div>
+      </section>
   );
 }
 
 export default App;
+
