@@ -1,29 +1,44 @@
-import React from 'react';
-import Character0 from './components/Character0';
-import Character1 from './components/Character1';
-import Character2 from './components/Character2';
-import Character3 from './components/Character3';
+import React, {useState, useEffect} from 'react';
+import { BASE_URL } from './constants/key';
+import axios from 'axios';
+import Character from './components/Character';
+import styled from "styled-components";
 import './App.css';
 
 const App = () => {
-  // Try to think through what state you'll need for this app before starting. Then build out
-  // the state properties here.
 
-  // Fetch characters from the API in an effect hook. Remember, anytime you have a 
-  // side effect in a component, you want to think about which state and/or props it should
-  // sync up with, if any.
+  const [names, setNames] = useState([]);
+
+  useEffect(() => {
+      axios
+        .get(`${BASE_URL}`)
+        .then((res) => {
+          setNames(res.data.results);
+          console.log(res.data.results);
+          })
+        .catch(err => {
+          console.log(err);
+        })
+    }, []);
 
   return (
       <section>
         <div className="App">
-          <h1 className="Header">On The Look Out!</h1>
+          <Header>On The Look Out!</Header>
         </div>
-        <div className='main-content'>
-          <Character0 /> <Character1 /> <Character2 /> <Character3 />
+        <div>
+          <Character info={names} /> 
         </div>
       </section>
   );
 }
+
+const Header = styled.h1`
+  color: ${pr => pr.theme.thirdColor};
+  text-shadow: 1px 1px 5px ${pr => pr.theme.white};
+  font-weight: ${pr => pr.theme.fontWeight};
+  font-size:2rem;
+`;
 
 export default App;
 
